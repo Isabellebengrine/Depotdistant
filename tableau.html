@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Catalogue Jarditou</title>
+    <link rel="stylesheet" type="text/css" href="jarditoustyle.css">
+    <link rel="stylesheet" media="screen and (max-width: 768px)" href="Jstyleresponsive.css">
+
+</head>
+<body>
+	<header>
+
+		<!--pour mettre image et phrase sur deux colonnes égales:-->
+         <div class="row">
+  			<div class="column">
+  				<h1><!--titre le plus important, indique aux SE des mots-clefs qui resument page, seulmt 1 h1 par page, logiquement nom de l'entreprise-->
+           			<img src="images/jarditou_logo.jpg" alt="Logo de Jarditou" width="150">
+           		</h1>
+           	</div><!--ferme div 1e colonne-->
+           	<div class="column">
+           		<p>Tout le jardin</p>
+           	</div><!--ferme div 2e colonne-->
+        </div> 
+
+        <nav><!--Menu : mettre tous les liens du menu-->
+            <ul style="list-style-type:square">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="tableau.html">Tableau</a></li>
+                <li><a href="contact.html">Formulaire</a></li>
+            </ul>
+        </nav><!--ferme section nav (menu)-->
+
+        <article>
+            <img src="images/promotion.jpg" alt="Promotion sur lames de terrasse">
+        </article>
+    </header><!--ferme le header-->
+    
+    <!--pour faire deux colonnes inégales:-->
+	<section>
+		<div class="flex-container">
+            <div class="box1">
+                 <h2>Catalogue</h2>
+                 <hr class="style-six">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>ID</th>
+                            <th>Catégorie</th>
+                            <th>Libellé</th>
+                            <th>Prix</th>
+                            <th>Couleur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td><img src="jarditou_photos/7.jpg" alt="Image de barbecue 1" width="100"></td>
+                      <td>7</td>
+                      <td>Barbecues</td>
+                      <td>Aramis</td>
+                      <td>110.00€</td>
+                      <td>Brun</td>
+                    </tr>
+                    <tr>
+                        <td><img src="jarditou_photos/8.jpg" alt="Image de barbecue 2" width="100"></td>
+                        <td>8</td>
+                        <td>Barbecues</td>
+                        <td>Athos</td>
+                        <td>249.99€</td>
+                        <td>Noir</td>
+                    </tr>
+                    <tr>
+                        <td><img src="jarditou_photos/11.jpg" alt="Image de barbecue 3" width="100"></td>
+                        <td>11</td>
+                        <td>Barbecues</td>
+                        <td>Clatronic</td>
+                        <td>135.90€</td>
+                        <td>Chrome</td>
+                     </tr>
+                     <tr>
+                        <td><img src="jarditou_photos/12.jpg" alt="Image de barbecue 4" width="100"></td>
+                        <td>12</td>
+                        <td>Barbecues</td>
+                        <td>Camping</td>
+                        <td>88.00€</td>
+                        <td>Noir</td>
+                     </tr>    
+                     <tr>
+                        <td><img src="jarditou_photos/13.jpg" alt="Image de brouette" width="100"></td>
+                        <td>13</td>
+                        <td>Brouette</td>
+                        <td>Green</td>
+                        <td>49.00€</td>
+                        <td>Verte</td>
+                     </tr>
+                    
+                     </tbody>    
+                  </table> 
+		 	</div><!--ferme 1e colonne-->
+		 	<div class="box2">
+		 		<p>[COLONNE DROITE]</p>
+		 	</div><!--ferme 2e col-->
+		 </div> 
+
+        <!--selon contenu: <aside> ne doit servir que pour faire une aparte,
+    donc ici on n'a pas le contenu de la colonne mais si contenu n'est pas une aparte
+    par rapport au reste de la section, ce n'est pas un aside-->
+
+    </section><!--ferme partie centrale de page d'accueil-->
+    <footer>
+        <nav><!--pour menu du bas-->
+        <ul style="list-style-type:square">
+            <li><a href="">Mentions légales</a></li>
+            <li><a href="">Horaires</a></li>
+            <li><a href="">Plan du site</a></li>
+        </ul></nav>
+    </footer>
+
+</body>
+</html>
