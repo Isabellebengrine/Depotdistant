@@ -14,9 +14,9 @@
 
 		<div class="container-fluid"> 
 			<div class="row">
-                <div class="col-8"><img src="images/jarditou_logo.jpg" alt="Logo de Jarditou" title="Logo Jarditou" width="150">
+                <div class="col-8 col-sm-8"><img src="images/jarditou_logo.jpg" alt="Logo de Jarditou" title="Logo Jarditou" width="150">
                 </div>
-				<div class="col-4"><h1 class="text-center">Tout le jardin</h1>
+				<div class="col-4 col-sm-4"><h1 class="text-center">Tout le jardin</h1>
 				</div>
 			</div>
 		</div>
@@ -50,22 +50,22 @@
    		</article>
 	</header>
     <section>
-		<div class="container-fluid m-0 p-0"> 
-			
-				<div class="col-12 text-justify pl-0 pr-0">
+		<div class="container-fluid"> 
+			<div class="row m-1 m-sm-1">
+				<div class="col-12 col-sm-12 text-justify">
                     <form action="http://bienvu.net/script.php" method="post" id="formulaire_contact">
                     <p>* Ces zones sont obligatoires</p>
-                    <fieldset><!--pour encadrer une partie et donner titre avec balise legend-->
+                    <fieldset><!--pour donner titre à une partie avec balise legend-->
                         <legend><h2>Vos coordonnées</h2></legend>
                         <div class="form-group">
                             <label for="lname">Nom*</label>
-                            <input type="text" class="form-control" id="lname" name="lname" required aria-describedby="lnameHelp" placeholder="Veuillez saisir votre nom">
-                            <small id="lnameHelp" class="form-text text-muted">Un message d'erreur à afficher à cet endroit est tout à fait possible!</small>
+                            <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp" placeholder="Veuillez saisir votre nom" required>
+                            <p id="lnameHelp" class="text-danger"></p>
                         </div>    
                         <div class="form-group">
                             <label for="fname">Prénom*</label>
-                            <input type="text" class="form-control" id="fname" name="fname" required aria-describedby="fnameHelp" placeholder="Veuillez saisir votre prénom">
-                            <small id="fnameHelp" class="form-text text-muted">Un message d'erreur à afficher à cet endroit est tout à fait possible!</small>
+                            <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" placeholder="Veuillez saisir votre prénom" required>
+                            <p id="fnameHelp" class="text-danger"></p>
                         </div>
                         <p>Sexe*</p>
                         <div class="form-check form-check-inline">
@@ -78,11 +78,13 @@
                         </div>
                         <div class="form-group">
                             <label for="datenaissance">Date de naissance*</label>
-                            <input type="date" class="form-control" id="datenaissance" name="datenaissance" value="jj/mm/aaaa" placeholder="jj/mm/aaaa" required>
+                            <input type="date" class="form-control" id="datenaissance" name="datenaissance" value="jj/mm/aaaa" aria-describedby="bdateHelp" placeholder="jj/mm/aaaa" required>
+                            <p id="bdateHelp" class="text-danger"></p>
                         </div>
                         <div class="form-group">
                             <label for="cpostal">Code postal*</label>
-                            <input type="text" class="form-control" id="cpostal" name="cpostal">
+                            <input type="text" class="form-control" id="cpostal" name="cpostal" aria-describedby="cpHelp" required>
+                            <p id="cpHelp" class="text-danger"></p>
                         </div>
                         <div class="form-group">
                             <label for="adresse">Adresse</label>
@@ -94,7 +96,9 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="dave.loper@afpa.fr" required>
+                            <!--si precisé type="email" alors bootstrap fait tout seul validation du champ donc pas la peine de faire soimeme code js en plus-->
+                            <input type="text" class="form-control" id="email" name="email" placeholder="dave.loper@afpa.fr" aria-describedby="emlHelp" required>
+                            <p id="emlHelp" class="text-danger"></p>
                         </div>
                     </fieldset>
         
@@ -111,8 +115,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                        <label for="question">Votre question* :</label>
+                        <label for="votrequestion">Votre question* :</label>
                         <textarea class="form-control" name="votrequestion" rows="2" cols="15" id="votrequestion" required></textarea>
+                        <p id="vqHelp" class="text-danger"></p>
                         </div>
                     </fieldset>
                     
@@ -121,12 +126,12 @@
                         <label class="form-check-label" for="jaccepte"> J'accepte le traitement informatique de ce formulaire</label>
                     </div>
 
-                    <input class="btn btn-dark" type="submit" value="Envoyer">
-                    <input class="btn btn-dark" type="reset" value="Annuler">
+                    <input type="submit" class="btn btn-dark" value="Envoyer" id="boutonEnvoi">
+                    <input type="reset" class="btn btn-dark" value="Annuler">
             
                     </form>
                 </div> 
-            
+            </div><!--ferme div row-->
         </div><!--ferme div container fluid-->
     </section><!--ferme partie centrale de page d'accueil-->
     
@@ -156,5 +161,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <!--pour intégrer fichier.js pour Javascript non intrusif-->
+        <script src="controleform.js"></script>
     </body>
     </html>
