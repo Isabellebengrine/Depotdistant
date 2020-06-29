@@ -35,7 +35,9 @@ WHERE customers.Country = 'France'
 GROUP BY CompanyName
 HAVING COUNT(orders.OrderID) > 10;
 
-/*5e req: clients dt CA > 30.000*/
+/*5e req: clients dt CA > 30.000*
+NB d'abord j'ai changé le nom de la table de 'order details' à 'orderdetails' sans espace car sinon j'arrivais pas à écrire req - 
+de tts façons c'est pas conseillé de mettre noms avec un espace*/
 
 SELECT CompanyName AS 'Client', SUM(orderdetails.UnitPrice * orderdetails.Quantity) AS 'CA', Country AS 'Pays' FROM customers
 JOIN orders ON orders.CustomerID = customers.CustomerID
@@ -44,3 +46,36 @@ GROUP BY  CompanyName
 HAVING SUM(orderdetails.UnitPrice * orderdetails.Quantity)> 30000
 ORDER BY SUM(orderdetails.UnitPrice * orderdetails.Quantity) DESC;
 
+/*6e req: liste des pays dont clients commdé chez "Exotic Liquids"*/
+
+SELECT DISTINCT customers.Country AS 'Pays' FROM customers
+JOIN orders ON orders.CustomerID = customers.CustomerID
+JOIN orderdetails ON orderdetails.OrderID = orders.OrderID
+JOIN products ON products.ProductID = orderdetails.ProductID
+JOIN suppliers ON suppliers.SupplierID = products.SupplierID
+WHERE suppliers.CompanyName = 'Exotic Liquids'
+ORDER BY customers.Country;
+
+/*7e req: Montant des ventes en 1997*/
+
+SELECT SUM(UnitPrice * Quantity) AS 'Montant Ventes 97' FROM orderdetails
+INNER JOIN orders ON orderdetails.OrderID = orders.OrderID
+WHERE YEAR(OrderDate) = 1997
+GROUP BY YEAR(OrderDate);
+
+/*8e req: ventes en 1997 mois par mois*/
+
+SELECT MONTH(orders.OrderDate) AS 'Mois 97', SUM(UnitPrice * Quantity) AS 'Montant Ventes' FROM orderdetails
+INNER JOIN orders ON orderdetails.OrderID = orders.OrderID
+WHERE YEAR(OrderDate) = 1997
+GROUP BY MONTH(OrderDate);
+
+/*9e req: date de dern cde du client 'Du monde entier' */
+
+SELECT MAX(OrderDate) AS 'Date de dernière commande' FROM orders
+INNER JOIN customers ON customers.CustomerID = orders.CustomerID
+WHERE CompanyName = 'Du monde entier';
+
+/*10e req: délai moyen de livraison en jours*/
+
+SELECT ROUND(AVG(DATEDIFF(ShippedDate, OrderDate))) AS 'Délai moyen de livraison en jours' FROM orders;
