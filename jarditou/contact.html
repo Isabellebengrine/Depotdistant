@@ -56,7 +56,7 @@
 		<div class="container-fluid"> 
 			<div class="row m-1 m-sm-1">
 				<div class="col-12 col-sm-12 text-justify">
-                    <form method="post" action="http://localhost/jarditou/public/php/controle.php" id="formulaire_contact"><!--modifié nom fichier public/php/controle.php pour valider form - marche pas - donne HTTP ERROR 405 - WHY???-->
+                    <form method="post" action="http://localhost/jarditou/public/php/controle.php" id="formulaire_contact">
                     <!--vu sur w3schools form validation: autre possibilité
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
                         pour envoyer data sur page elle-meme au lieu de sauter à une page différente
@@ -68,15 +68,15 @@
                     <p>* Ces zones sont obligatoires</p>
                     <fieldset><!--pour donner titre à une partie avec balise legend-->
                         <legend><h2>Vos coordonnées</h2></legend>
-                        <div class="form-group">
+                        <div><!--enlevé class="form-group" pour désactiver msg d'erreur et permettre envoi du form pour voir si msg erreur php fonctionne-->
                             <label for="lname">Nom*</label>
-                            <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp" placeholder="Veuillez saisir votre nom" required>
+                            <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp" placeholder="Veuillez saisir votre nom"><!--enlevé required pour désactiver controle automatiq-->
                             <p id="lnameHelp" class="text-danger"></p>
                             <span class="error"><?php echo $lnameErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>    
                         <div class="form-group">
                             <label for="fname">Prénom*</label>
-                            <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" placeholder="Veuillez saisir votre prénom" required>
+                            <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" placeholder="Veuillez saisir votre prénom"><!--enlevé required-->
                             <p id="fnameHelp" class="text-danger"></p>
                             <span class="error"><?php echo $fnameErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
@@ -90,14 +90,14 @@
                             <label class="form-check-label" for="masculin">Masculin</label>
                         </div>
                         <div class="form-group">
-                            <label for="datenaissance">Date de naissance*</label>
-                            <input type="date" class="form-control" id="datenaissance" name="datenaissance" value="jj/mm/aaaa" aria-describedby="bdateHelp" placeholder="jj/mm/aaaa" required>
+                            <label for="datenaissance">Date de naissance*</label><!--enlevé type="date" pour supprimer msg d'erreur html et value et placeholder="jj/mm/aaaa"-->
+                            <input type="text" class="form-control" id="datenaissance" name="datenaissance" aria-describedby="bdateHelp">
                             <p id="bdateHelp" class="text-danger"></p>
                             <span class="error"><?php echo $dnErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                         <div class="form-group">
                             <label for="cpostal">Code postal*</label>
-                            <input type="text" class="form-control" id="cpostal" name="cpostal" aria-describedby="cpHelp" required>
+                            <input type="text" class="form-control" id="cpostal" name="cpostal" aria-describedby="cpHelp"><!--enlevé required-->
                             <p id="cpHelp" class="text-danger"></p>
                             <span class="error"><?php echo $cpErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="dave.loper@afpa.fr" aria-describedby="emlHelp" required>
+                            <input type="text" class="form-control" id="email" name="email" aria-describedby="emlHelp"><!--enlevé type = email et required et placeholder="dave.loper@afpa.fr" pour vérif php-->
                             <p id="emlHelp" class="text-danger"></p>
                             <span class="error"><?php echo $emailErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
@@ -131,14 +131,14 @@
                         </div>
                         <div class="form-group">
                         <label for="votrequestion">Votre question* :</label>
-                        <textarea class="form-control" name="votrequestion" rows="2" cols="15" id="votrequestion" value="<?php echo $vq;?>" required></textarea>
+                        <textarea class="form-control" name="votrequestion" rows="2" cols="15" id="votrequestion"></textarea><!--enlevé required-->
                         <p id="vqHelp" class="text-danger"></p>
                         <span class="error"><?php echo $vqErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                     </fieldset>
                     
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="jaccepte" name="jaccepte" value="jaccepte">
+                        <input type="checkbox" class="form-check-input" id="jaccepte" name="jaccepte[]" value="jaccepte"><!--modif du name pour php-->
                         <label class="form-check-label" for="jaccepte"> J'accepte le traitement informatique de ce formulaire</label>
                     </div>
 
