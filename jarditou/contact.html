@@ -8,9 +8,6 @@
 	<title>Contact Jarditou</title>
 	<link rel="stylesheet" type="text/css" href="public/css/jarditoustyle.css">
     <link rel="stylesheet" media="screen and (max-width: 768px)" href="public/css/Jstyleresponsive.css">
-    <style>
-        .error {color: #FF0000;}/*correspond à classe error pour balise span de vérif du form par php - devrait être séparé de html et inclus dans fichier css*/
-    </style>
 </head>
 <body>
 	<header>
@@ -72,13 +69,11 @@
                             <label for="lname">Nom*</label>
                             <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp" placeholder="Veuillez saisir votre nom"><!--enlevé required pour désactiver controle automatiq-->
                             <p id="lnameHelp" class="text-danger"></p>
-                            <span class="error"><?php echo $lnameErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>    
                         <div class="form-group">
                             <label for="fname">Prénom*</label>
                             <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" placeholder="Veuillez saisir votre prénom"><!--enlevé required-->
                             <p id="fnameHelp" class="text-danger"></p>
-                            <span class="error"><?php echo $fnameErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                         <p>Sexe*</p>
                         <div class="form-check form-check-inline">
@@ -90,16 +85,14 @@
                             <label class="form-check-label" for="masculin">Masculin</label>
                         </div>
                         <div class="form-group">
-                            <label for="datenaissance">Date de naissance*</label><!--enlevé type="date" pour supprimer msg d'erreur html et value et placeholder="jj/mm/aaaa"-->
+                            <label for="datenaissance">Date de naissance*</label><!--enlevé input type="date" pour supprimer msg d'erreur et value et placeholder="jj/mm/aaaa"-->
                             <input type="text" class="form-control" id="datenaissance" name="datenaissance" aria-describedby="bdateHelp">
                             <p id="bdateHelp" class="text-danger"></p>
-                            <span class="error"><?php echo $dnErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                         <div class="form-group">
                             <label for="cpostal">Code postal*</label>
                             <input type="text" class="form-control" id="cpostal" name="cpostal" aria-describedby="cpHelp"><!--enlevé required-->
                             <p id="cpHelp" class="text-danger"></p>
-                            <span class="error"><?php echo $cpErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                         <div class="form-group">
                             <label for="adresse">Adresse</label>
@@ -111,9 +104,9 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
-                            <input type="text" class="form-control" id="email" name="email" aria-describedby="emlHelp"><!--enlevé type = email et required et placeholder="dave.loper@afpa.fr" pour vérif php-->
+                            <input type="text" class="form-control" id="email" name="email" aria-describedby="emlHelp">
+                            <!--enlevé type = email et required et placeholder="dave.loper@afpa.fr" pour vérif php-->
                             <p id="emlHelp" class="text-danger"></p>
-                            <span class="error"><?php echo $emailErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                     </fieldset>
         
@@ -133,7 +126,6 @@
                         <label for="votrequestion">Votre question* :</label>
                         <textarea class="form-control" name="votrequestion" rows="2" cols="15" id="votrequestion"></textarea><!--enlevé required-->
                         <p id="vqHelp" class="text-danger"></p>
-                        <span class="error"><?php echo $vqErr;?></span><!--pour insérer msg d'erreur lors de vérif php-->
                         </div>
                     </fieldset>
                     

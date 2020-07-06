@@ -11,89 +11,88 @@
         // On utilisera le nom du champ comme cle du tableau
         $erreurs = array();
 
-       if ($_SERVER["REQUEST_METHOD"] == "POST") {//quand form est envoyé
-
         //vu sur w3schools pour form validation : pour + de sécurité contre risques d'injection de code javascript dans des champs par personnes malveillantes       
         //create a function that will do all the checking for us
-            function test_input($data) {//can only be used when data is de type string
-                $data = trim($data);//to Strip unnecessary characters (extra space, tab, newline) from the user input data 
-                $data = stripslashes($data);//Remove backslashes (\) from the user input data
-                $data = htmlspecialchars($data);//converts special characters to HTML entities, to prevent hacking attempts
-                return $data;
-            }
+        function test_input($data) {//can only be used when data is of type string
+            $data = trim($data);//to Strip unnecessary characters (extra space, tab, newline) from the user input data 
+            $data = stripslashes($data);//Remove backslashes (\) from the user input data
+            $data = htmlspecialchars($data);//converts special characters to HTML entities, to prevent hacking attempts
+            return $data;
+        }
 
-            // définir variables et les initialiser avec valeurs vides
-            $fname = $lname = $sexe = $dn = $cp = $adresse = $ville = $vq = $ok = $sujet = "";
-            // A ENLEVER ?? $fnameErr = $emailErr = $lnameErr = $dnErr = $cpErr = $vqErr = "";//error variables will hold error messages for the required fields
-                
+        // définir variables et les initialiser avec valeurs vides
+        $fname = $lname = $sexe = $dn = $cp = $adresse = $ville = $vq = $ok = $sujet = "";
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {// donc quand form est envoyé
+        
             //je fais même vérif pour chaque champ requis - ici pour nom
             if (empty($_POST["lname"])) {//teste si champ est vide
-                $erreurs["lname"] = "Le nom doit être renseigné";
+                $erreurs["lname"] = "Le nom doit être renseigné.";
                 echo $erreurs["lname"]."<br>";
             } else {
                 $lname = test_input($_POST["lname"]);//sinon je passe la donnée dans la fonction définie ci-dessus pour + de sécurité
                 if (!preg_match("/^[A-Z][a-zA-Z '&-]*[A-Za-z]$/",$lname)) {//regex pour tout ce qui commence par une lettre majuscule, suivi de zéro ou plus de toute lettre, espace, trait d'union, esperluette ou apostrophe et se terminant par une lettre
-                    $erreurs["lname"] = "Vérifiez votre saisie (seules lettres, espace, trait d'union, esperluette(&) et apostrophe sont autorisés)";
+                    $erreurs["lname"] = "Vérifiez la saisie de votre nom (seules lettres, espace, trait d'union, esperluette(&) et apostrophe sont autorisés).";
                     echo $erreurs["lname"]."<br>";
                 }
             }
             
             if (empty($_POST["fname"])) {
-                $erreurs["fname"] = "Le prénom doit être renseigné";
+                $erreurs["fname"] = "Le prénom doit être renseigné.";
                 echo $erreurs["fname"]."<br>";
             } else {
                 $fname = test_input($_POST["fname"]);
                 if (!preg_match("/^[A-Z][a-zA-Z '&-]*[A-Za-z]$/",$fname)) {//regex pour tout ce qui commence par une lettre majuscule, suivi de zéro ou plus de toute lettre, espace, trait d'union, esperluette ou apostrophe et se terminant par une lettre
-                    $erreurs["fname"] = "Vérifiez votre saisie (seules lettres, espace, trait d'union, esperluette(&) et apostrophe sont autorisés)";
+                    $erreurs["fname"] = "Vérifiez la saisie de votre prénom (seules lettres, espace, trait d'union, esperluette(&) et apostrophe sont autorisés).";
                     echo $erreurs["fname"]."<br>";
                 }
             }
             
             // même chose pour e-mail
             if (empty($_POST["email"])) {
-                $erreurs["email"] = "L'e-mail doit être renseigné";
+                $erreurs["email"] = "L'e-mail doit être renseigné.";
                 echo $erreurs["email"]."<br>";
             } else {
                 $email = test_input($_POST["email"]);
                 //vérifie si email adresse est valide:
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $erreurs["email"] = "Vérifiez votre saisie: cette adresse est invalide";
+                    $erreurs["email"] = "Vérifiez la saisie de votre adresse e-mail : cette adresse est invalide.";
                     echo $erreurs["email"]."<br>";
                 }
             }
 
             //pour date de naissance
             if (empty($_POST["datenaissance"])) {
-                $erreurs["datenaissance"] = "La date de naissance doit être renseignée";
+                $erreurs["datenaissance"] = "La date de naissance doit être renseignée.";
                 echo $erreurs["datenaissance"]."<br>";
             } else {
                 $dn = test_input($_POST["datenaissance"]);
                 if (!preg_match("/^[0-9][0-9]?\/[0-9][0-9]?\/[0-9][0-9][0-9]?[0-9]?$/",$dn)) {//regex pour date avec jr et mois en 1-2 chiffres, année en 2 ou 4 chiffres, sép par /
-                    $erreurs["datenaissance"] = "Vérifiez votre saisie (écrivez la date avec le jour et le mois en un ou 2 chiffres, l'année sur 2 ou 4 chiffres, séparés par /)";
+                    $erreurs["datenaissance"] = "Vérifiez la saisie de votre date de naissance (écrivez la date avec le jour et le mois en un ou 2 chiffres, l'année sur 2 ou 4 chiffres, séparés par /).";
                     echo $erreurs["datenaissance"]."<br>";
                 }
             }
             
             //pour code postal
             if (empty($_POST["cpostal"])) {
-                $erreurs["cpostal"] = "Le code postal doit être renseigné";
+                $erreurs["cpostal"] = "Le code postal doit être renseigné.";
                 echo $erreurs["cpostal"]."<br>";
             } else {
                 $cp = test_input($_POST["cpostal"]);
                 if (!preg_match("/^[0-9]{5}$/",$cp)) {//regex pour 5 chiffres
-                    $erreurs["cpostal"] = "Vérifiez votre saisie (un code postal se compose de 5 caractères numériques)";
+                    $erreurs["cpostal"] = "Vérifiez la saisie de votre code postal (un code postal se compose de 5 caractères numériques).";
                     echo $erreurs["cpostal"]."<br>";
                 }
             }
 
             //pour question
             if (empty($_POST["votrequestion"])) {
-                $erreurs["votrequestion"] = "Votre question doit être renseignée";
+                $erreurs["votrequestion"] = "Votre question doit être renseignée.";
                 echo $erreurs["votrequestion"]."<br>";
             } else {
                 $vq = test_input($_POST["votrequestion"]);
                 if (!preg_match("/^[A-Za-z0-9 .'&_-]+$/",$vq)) {//regex pour mots, nombres, caractères spéciaux classiques
-                    $erreurs["votrequestion"] = "Vérifiez votre saisie";
+                    $erreurs["votrequestion"] = "Vérifiez la saisie de votre question.";
                     echo $erreurs["votrequestion"]."<br>";
                 }
             }
@@ -103,7 +102,7 @@
                 $adresse = test_input($_POST["adresse"]);
                 $ville = test_input($_POST["ville"]);
                 $sexe = test_input($_POST["sexe"]);//NB. était required au départ mais on est obligé de choisir une option donc tjs renseigné en fait
-             }
+            }
 
             if (count($erreurs) == 0) { // donc ya aucune erreur donc afficher les données
                 echo "<h2>Vos données:</h2>";
@@ -121,20 +120,15 @@
                     echo "Le sujet de votre demande est: ".$sujet."<br>"; 
                 } 
                 echo "Votre question: ".$vq."<br>";
-
-                //lecture du tableau pour checkbox :        -PB AVEC CHECKBOX A REVOIR
-                /*var_dump($ok);//test
-                foreach (($_REQUEST["jaccepte"]) as $ok)      
-                { 
-                    echo "Vous avez choisi: ".$ok."<br>"; 
-                } 
-            */
-                if ($ok == null){
-                    echo "N'accepte pas le traitement informatique <br>";
-                } else {
-                    echo "Accepte le traitement informatique <br>";
+                //lecture du tableau pour checkbox :
+                // on vérifie si la case "jaccepte" est cochée
+                if (isset($_POST['jaccepte'])) {
+                    // la variable "$ok" récupère la valeur de la cases cochée
+                    $ok = $_POST['jaccepte'];//ya qu'une valeur, pas de choix multiples donc pas besoin de lire tableau jaccepte[]
+                    echo "Vous acceptez le traitement informatique de ce formulaire.<br>";
+                } else {//ca veut dire que la case n'a pas été cochée
+                    echo "Vous n'acceptez pas le traitement informatique de ce formulaire.<br>";
                 }
-                //REVOIR CHECKBOX CI6DESSUS EN FAIT ON PEUT PAS CHOISIR PLUSIEURS CHOIX ICI DONC SINON FAUT 2 CHECKBOX 1 JACCEPTE 2 JE NACCEPTE PAS NON???
                 
             }
 
