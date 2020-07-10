@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle du formulaire d'ajout de nouveau produit</title>
+    <title>Controle du formulaire de modif de produit</title>
 </head>
 <body>
     <?php         
@@ -27,7 +27,7 @@
         }
 
         // définir variables et les initialiser avec valeurs vides
-        $refpdt = $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $ajoutpdt = $modifpdt = $optradio = "";
+        $refpdt = $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $ajoutpdt = $modifpdt = $blocpdt = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {// donc quand form est envoyé
         
