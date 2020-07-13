@@ -5,16 +5,33 @@
 
     $db = connexionBase(); // Appel de la fonction de connexion
     $pro_id = $_GET["pro_id"];
-    $requete = "SELECT categories.cat_nom, pro_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_bloque, pro_d_ajout, pro_d_modif FROM produits 
+    $requete = $db->prepare("SELECT categories.cat_nom, pro_photo, pro_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_bloque, pro_d_ajout, pro_d_modif FROM produits 
     JOIN categories ON cat_id = pro_cat_id
-    WHERE pro_id=".$pro_id;//on veut tous champs pour cette ligne y compris dans table categories, champ cat_nom pour 'Catégorie'
-    $result = $db->query($requete);
+    WHERE pro_id=".$pro_id);//on veut tous champs pour cette ligne y compris dans table categories, champ cat_nom pour 'Catégorie'
+    $requete->execute();
+    if (!$requete) //donc si la variable $requete vaut NULL
+    {
+        $tableauErreurs = $db->errorInfo();
+        echo $tableauErreur[2]; 
+        die("Erreur dans la requête");
+    }
     
+    if ($requete->rowCount() == 0) 
+    {
+       // Pas d'enregistrement
+       die("La table est vide");
+    }
+
     // Renvoi de l'enregistrement sous forme d'un objet
-    $produit = $result->fetch(PDO::FETCH_OBJ);
+    $produit = $requete->fetch(PDO::FETCH_OBJ);
    ?>
         <div class="row m-1 m-sm-1">
           <div class="col-12 col-sm-12 text-justify">
+            <div class="text-center">
+              <?php 
+              $image = $produit->pro_id.".".$produit->pro_photo;
+              echo '<img src="/jarditou/public/images/'.$image.'" width="200" alt="Image du produit">';?>
+            </div>
            <form><!--en fait ici j'utilise form mais je ne veux pas saisir les champs par contre je veux les voir avec les valeurs de la base donc je ne renseigne pas action ou method et je mets tous champs en disabled, j'utiliserai la meme structure de page ensuite dans formulairemodif.php pour plus d'homogénéité-->
               <div class="form-group">
                 <label for="idproduit">ID</label>
@@ -70,17 +87,11 @@
               </div>
             <button class="btn btn-dark my-2 my-sm-0" type="button"  onclick="window.location.href='liste.php'">Retour à la liste</button>
             <button class="btn btn-warning my-2 my-sm-0" type="button"  onclick="window.location.href='<?php echo 'formulairemodif.php?pro_id='.$produit->pro_id;?>'">Modifier</button>
-            <button class="btn btn-danger my-2 my-sm-0" type="button"  onclick="window.location.href='<?php echo 'suppression.php?pro_id='.$produit->pro_id;?>'">Supprimer</button>
-
-            
+            <button class="btn btn-danger my-2 my-sm-0" type="button" id="supprimer">Supprimer</button>
+            <input type="hidden" id="adhref" value="<?php echo 'suppression.php?pro_id='.$produit->pro_id; ?>"/>
             </form>
           </div> 
         </div><!--ferme div row-->
-      </div><!--ferme div container-->
-
-
-  
-
 <?php 
 include("footer.php");
 ?>

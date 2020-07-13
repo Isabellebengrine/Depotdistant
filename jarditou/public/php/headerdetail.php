@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/jarditou/public/css/jarditoustyle.css">
+    <link rel="stylesheet" href="/jarditou/public/css/Jstyleresponsive.css">
     <title>Jarditou détail produit</title>
 </head>
 <body>
@@ -35,10 +36,10 @@
                         <a class="nav-link" href="liste.php">Tableau</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.php">Contact</a>
+                        <a class="nav-link" href="/jarditou/contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formulaireajout.html">Ajouter un produit</a>
+                        <a class="nav-link" href="/jarditou/formulaireajout.html">Ajouter un produit</a>
                     </li>
                 </ul>
                     <button class="btn btn-dark my-2 my-sm-0" type="button" value="Connexion" id="btnConnexion">Connexion</button>
