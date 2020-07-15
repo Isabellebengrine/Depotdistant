@@ -8,7 +8,7 @@
 <body>
     <?php         
 
-        require "public/php/connexion_bdd.php"; // Inclusion de notre bibliothèque de fonctions
+        require "connexion_bdd.php"; // Inclusion de notre bibliothèque de fonctions
         $db = connexionBase(); // Appel de la fonction de connexion à db jarditou
 
         //D'ABORD Récupération et vérification des informations transmises par le formulaire
@@ -27,7 +27,8 @@
         }
 
         // définir variables et les initialiser avec valeurs vides
-        $refpdt = $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $ajoutpdt = $modifpdt = $blocpdt = "";
+        $refpdt = $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $modifpdt = $blocpdt = "";
+        $pro_id = $_GET["pro_id"];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {// donc quand form est envoyé
         
@@ -110,33 +111,33 @@
                 echo $erreurs["photopdt"]."<br>";
             }
 
-            //pour date d'ajout
-            if (empty($_POST["ajoutpdt"])) {
-                $erreurs["ajoutpdt"] = "La date d'ajout doit être renseignée.";
-                echo $erreurs["ajoutpdt"]."<br>";
+            //pour date de modif
+            if (empty($_POST["modifpdt"])) {
+                $erreurs["modifpdt"] = "La date de modification doit être renseignée.";
+                echo $erreurs["modifpdt"]."<br>";
             } else {
-                $ajoutpdt = $_POST["ajoutpdt"];
-                if (!preg_match("/^[0-3][0-9]-[0-9]{2}-[1-2][0-9]{3}$/",$ajoutpdt)) {//regex pour date format dd-mm-yyyy
-                    $erreurs["ajoutpdt"] = "Vérifiez la saisie de la date d'ajout (format type dd-mm-yyyy).";
-                    echo $erreurs["ajoutpdt"]."<br>";
+                $ajoutpdt = $_POST["modifpdt"];
+                if (!preg_match("/^[0-3][0-9]-[0-9]{2}-[1-2][0-9]{3}$/",$modifpdt)) {//regex pour date format dd-mm-yyyy
+                    $erreurs["modifpdt"] = "Vérifiez la saisie de la date de modification (format type dd-mm-yyyy).";
+                    echo $erreurs["modifpdt"]."<br>";
                 }
             }
             //pour changer format d'une date et que çà passe dans les requêtes sans problème:
             //On récupère ce timestamp à l’aide de la fonction strtotime(), et on le repasse sous un autre format à l’aide de la fonction date() :
-            $ajoutpdt = date('Y-m-d', strtotime($ajoutpdt));// même format que dans db
+            $modifpdt = date('Y-m-d', strtotime($modifpdt));// même format que dans db
             
             // pour produit bloqué (bouton radio oui ou non)
             $blocpdt = $_POST['blocpdt']; 
+            var_dump($blocpdt);//test
 
-            //$modifpdt = "";//pro_d_modif null pour ajout de nvo pdt
-
-            if (count($erreurs) == 0) {// donc ya aucune erreur donc on passe à la suite
-                //ENSUITE Enregistrement des données dans la base (pas mis pro_id puisque auto-incrémenté)
-                // Requête d'insertion d'enregistrement - // On ajoute un enregistrement dans la table produits
+                        if (count($erreurs) == 0) {// donc ya aucune erreur donc on passe à la suite
+                //ENSUITE Enregistrement des MODIFICATIONS des données dans la base (pas mis pro_id puisque auto-incrémenté)
+                // Requête UPDATE dans la table produits
                     
                 if ($blocpdt == 1){
-                    $requete = $db->prepare("INSERT INTO produits (pro_ref, pro_cat_id, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_photo, pro_d_ajout, pro_bloque) VALUES (:refpdt, :catpdt, :libpdt, :descriptionpdt, :prixpdt, :stockpdt, :couleurpdt, :photopdt, :ajoutpdt, :blocpdt)");
-                    $requete->bindValue(":refpdt", $refpdt);////La constante de type par défaut est STR donc je ne précise que pour les autres (les dates sont considérées comme str)
+                    $requete = $db->prepare("UPDATE produits SET pro_ref = :refpdt, pro_cat_id = :catpdt, pro_libelle = :libpdt, pro_description = :descriptionpdt, pro_prix = :prixpdt, pro_stock = :stockpdt, pro_couleur = couleurpdt, pro_photo = :photopdt, pro_bloque = :blocpdt, pro_d_modif = :modifpdt
+                    WHERE pro_id =".$pro_id.";");
+                    $requete->bindValue(":refpdt", $refpdt);////La constante de type par défaut est STR donc je ne précise que pour les autres (dates aussi considérées comme str)
                     $requete->bindValue(":catpdt", $catpdt, PDO::PARAM_INT);
                     $requete->bindValue(":libpdt", $libpdt);
                     $requete->bindValue(":descriptionpdt", $descriptionpdt);
@@ -144,7 +145,7 @@
                     $requete->bindValue(":stockpdt", $stockpdt, PDO::PARAM_INT);
                     $requete->bindValue(":couleurpdt", $couleurpdt);
                     $requete->bindValue(":photopdt", $photopdt);
-                    $requete->bindValue(":ajoutpdt", $ajoutpdt);
+                    $requete->bindValue(":modifpdt", $modifpdt);
                     $requete->bindValue(":blocpdt", $blocpdt, PDO::PARAM_INT);
                     $requete->execute();
                 } else {//modif rqt pour pas pb avec pro_bloque et valeur null par défaut pour s'afficher dans rqt de liste.php

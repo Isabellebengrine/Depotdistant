@@ -1,12 +1,13 @@
 //appel fonctions au fur et à mesure de la saisie au lieu d'attendre la fin
 document.getElementById("refpdt").addEventListener("input", checkref);
+document.getElementById("catpdt").addEventListener("input", checkcat);
 document.getElementById("libpdt").addEventListener("input", checklib);
 document.getElementById("descriptionpdt").addEventListener("input", checkdesc);
 document.getElementById("prixpdt").addEventListener("input", checkprix);
 document.getElementById("stockpdt").addEventListener("input", checkstock);
 document.getElementById("couleurpdt").addEventListener("input", checkclr);
 document.getElementById("photopdt").addEventListener("input", checkphoto);
-document.getElementById("ajoutpdt").addEventListener("input", checkdate);
+document.getElementById("modifpdt").addEventListener("input", checkdate);
 
 //NB lors de l'utilisation de addEventListener ... le renvoi de false n'a aucun effet. L'interface dans la spécification dit que le type de retour est null. 
 //Utilisez event.preventDefault () pour stopper l'envoi du formulaire à la place:
@@ -16,6 +17,10 @@ document.forms[0].addEventListener("submit", function(evenement){
         evenement.preventDefault();
         document.getElementById("refHelp").innerHTML = "Tapez une référence";
         document.getElementById("refpdt").focus();
+    } else if (document.getElementById("catpdt").value == "") {
+        evenement.preventDefault();
+        document.getElementById("catHelp").innerHTML = "Tapez une catégorie";
+        document.getElementById("catpdt").focus();
     } else if (document.getElementById("libpdt").value == "") {
       evenement.preventDefault();
       document.getElementById("libHelp").innerHTML = "Tapez un libellé";
@@ -40,10 +45,10 @@ document.forms[0].addEventListener("submit", function(evenement){
         evenement.preventDefault();
         document.getElementById("phtHelp").innerHTML = "Vérifiez l'extension de votre fichier photo";
         document.getElementById("photopdt").focus();
-    } else if (document.getElementById("ajoutpdt").value == "") {
+    } else if (document.getElementById("modifpdt").value == "") {
       evenement.preventDefault();
-      document.getElementById("dajtHelp").innerHTML = "Entrez la date d'ajout";
-      document.getElementById("ajoutpdt").focus();
+      document.getElementById("dmodifHelp").innerHTML = "Entrez la date de modification";
+      document.getElementById("modifpdt").focus();
     }
 });
 
@@ -61,6 +66,22 @@ function checkref(){
       return false;
     }else {
       document.getElementById("refHelp").innerHTML = "Référence OK!";
+      return true;
+    }
+  }
+}
+
+function checkcat(){
+  var y = document.forms["formulaire_produit"]["catpdt"].value;
+  if (y == "") {
+  document.getElementById("catHelp").innerHTML = "Attention, il manque la catégorie!";
+    return false;
+  }else {
+    if (y >30){
+      document.getElementById("catHelp").innerHTML = "Vérifiez la saisie de la catégorie (ce doit être un nombre entier entre 1 et 30).";
+      return false;
+    }else {
+      document.getElementById("catHelp").innerHTML = "Catégorie OK!";
       return true;
     }
   }
@@ -160,18 +181,18 @@ function checkphoto(){//champ photo : null autorisé
 }
 
 function checkdate(){
-    var x = document.forms["formulaire_produit"]["ajoutpdt"].value;
+    var x = document.forms["formulaire_produit"]["modifpdt"].value;
     if (x == "") {
-      document.getElementById("dajtHelp").innerHTML = "Attention, il manque la date d'ajout!";
+      document.getElementById("dmodifHelp").innerHTML = "Attention, il manque la date de modification!";
       return false;
     }else {
       var filtre = new RegExp("^[0-3][0-9]-[0-9]{2}-[1-2][0-9]{3}$");
       var resultat = filtre.test(x);
       if (resultat == false){
-        document.getElementById("dajtHelp").innerHTML = "Vérifiez la saisie de la date d'ajout (format type dd-mm-yyyy).";
+        document.getElementById("dmodifHelp").innerHTML = "Vérifiez la saisie de la date de modification (format type dd-mm-yyyy).";
         return false;
       }else {
-        document.getElementById("dajtHelp").innerHTML = "Date d'ajout OK!";
+        document.getElementById("dmodifHelp").innerHTML = "Date de modification OK!";
         return true;
       }
     }

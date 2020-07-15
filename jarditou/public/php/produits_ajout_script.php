@@ -47,11 +47,7 @@
                 $erreurs["catpdt"] = "La catégorie doit être renseignée.";
                 echo $erreurs["catpdt"]."<br>";
             } else {
-                $catpdt = test_input($_POST["catpdt"]);//sinon je passe la donnée dans la fonction définie ci-dessus pour + de sécurité
-                if ($catpdt>30) {//CONDITION pour que numero de categorie existe car sert de FK dans table produits
-                    $erreurs["catpdt"] = "Vérifiez la saisie de la catégorie (ce doit être un nombre entier entre 1 et 30).";
-                    echo $erreurs["catpdt"]."<br>";
-                }
+                $catpdt = ($_POST["catpdt"]);
             }
             
             if (empty($_POST["libpdt"])) {

@@ -67,6 +67,10 @@
                 <label for="couleurpdt">Couleur</label>
                 <input type="text" class="form-control" id="couleurpdt" name="couleurpdt" value="<?php echo $produit->pro_couleur;?>" disabled="disabled">
               </div>
+              <div class="form-group">
+                <label for="photopdt">Photo :</label>
+                <input type="text" class="form-control" id="photopdt" name="photopdt" value="<?php echo $produit->pro_photo;?>" disabled="disabled">
+                </div>
               <div class="form-check-inline">
                 <label class="form-check-label">Produit bloqué ?:
                   <input type="radio" class="form-check-input" name="optradio" <?php if (!is_null($produit->pro_bloque)) { echo "checked"; } ?> disabled="disabled">Oui
