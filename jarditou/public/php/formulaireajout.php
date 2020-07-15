@@ -20,13 +20,13 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			  <ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-				  <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
+				  <a class="nav-link" href="/jarditou/index.html">Accueil <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="#">Mon compte</a><!--on ne sait pas vers quelle page va 'Mon Compte' donc lien # à définir-->
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="contact.html">Contact</a>
+				  <a class="nav-link" href="/jarditou/contact.html">Contact</a>
 				</li>
 			  </ul>
 			</div>

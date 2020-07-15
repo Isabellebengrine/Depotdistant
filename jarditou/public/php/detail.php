@@ -90,7 +90,7 @@
                 <input type="text" class="form-control" id="modifpdt" name="modifpdt" value="<?php echo $produit->pro_d_modif;?>" disabled="disabled">
               </div>
             <button class="btn btn-dark my-2 my-sm-0" type="button"  onclick="window.location.href='liste.php'">Retour à la liste</button>
-            <button class="btn btn-warning my-2 my-sm-0" type="button"  onclick="window.location.href='<?php echo 'formulairemodif.php?pro_id='.$produit->pro_id;?>'">Modifier</button>
+            <button class="btn btn-warning my-2 my-sm-0" type="button"  onclick="window.location.href='<?php echo 'formulairemodif.php?pro_id='.$produit->pro_id.'&pro_ref='.$produit->pro_ref;?>'">Modifier</button>
             <button class="btn btn-danger my-2 my-sm-0" type="button" id="supprimer">Supprimer</button>
             <input type="hidden" id="adhref" value="<?php echo 'suppression.php?pro_id='.$produit->pro_id; ?>"/>
             </form>

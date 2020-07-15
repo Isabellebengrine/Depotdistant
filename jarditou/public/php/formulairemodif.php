@@ -12,7 +12,8 @@
 
     $db = connexionBase(); // Appel de la fonction de connexion
     $pro_id = $_GET["pro_id"];
-    $requete = $db->prepare("SELECT categories.cat_nom, pro_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_bloque, pro_d_ajout, pro_d_modif FROM produits 
+    $pro_ref = $_GET["pro_ref"];
+    $requete = $db->prepare("SELECT categories.cat_nom, pro_id, pro_ref, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_photo, pro_bloque, pro_d_ajout, pro_d_modif FROM produits 
     JOIN categories ON cat_id = pro_cat_id
     WHERE pro_id=".$pro_id);//on veut tous champs pour cette ligne y compris dans table categories, champ cat_nom pour 'Catégorie'
     $requete->execute();
@@ -55,7 +56,7 @@
                 <input type="text" class="form-control" id="idpdt" name="idpdt" value="<?php echo $produit->pro_id;?>" disabled="disabled">
                 <p id="idpdt" class="text-danger"></p><!--sert à js donc à enlever si pas besoin A VERIFIER -->
               </div>
-              <div class="form-group">
+              <div class="form-group"><!--ref sert d'index dans table produits donc ref est uniq et liée à l'ID du produit donc champ passé en GET dans url-->
                 <label for="refpdt">Référence</label>
                 <input type="text" class="form-control" id="refpdt" name="refpdt" value="<?php echo $produit->pro_ref;?>">
                 <p id="refHelp" class="text-danger"></p>
@@ -105,9 +106,8 @@
                 <p id="clrHelp" class="text-danger"></p>
               </div>
               <div class="form-group">
-                <label for="photopdt">Photo</label>
+                <label for="photopdt">Photo :</label>
                 <input type="text" class="form-control" id="photopdt" name="photopdt" value="<?php echo $produit->pro_photo;?>">
-                <p id="phtHelp" class="text-danger"></p>
                 </div>
               <div class="form-check-inline">
                 <label class="form-check-label">Produit bloqué:
@@ -135,10 +135,6 @@
           </div> 
         </div><!--ferme div row-->
       </div><!--ferme div container fluid-->
-
-
-  
-
 
         <!--pour intégrer fichiers Javascript nécessaires à Bootstrap; placez ce code avant la fermeture de la balise body, l'ordre des fichiers est à respecter (Jquery, Popper puis Bootstrap) -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

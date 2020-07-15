@@ -27,8 +27,10 @@
         }
 
         // définir variables et les initialiser avec valeurs vides
-        $refpdt = $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $modifpdt = $blocpdt = "";
+        
+        $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $modifpdt = $blocpdt = "";
         $pro_id = $_GET["pro_id"];
+        $pro_ref = $_GET["pro_ref"];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {// donc quand form est envoyé
         
@@ -116,7 +118,7 @@
                 $erreurs["modifpdt"] = "La date de modification doit être renseignée.";
                 echo $erreurs["modifpdt"]."<br>";
             } else {
-                $ajoutpdt = $_POST["modifpdt"];
+                $modifpdt = $_POST["modifpdt"];
                 if (!preg_match("/^[0-3][0-9]-[0-9]{2}-[1-2][0-9]{3}$/",$modifpdt)) {//regex pour date format dd-mm-yyyy
                     $erreurs["modifpdt"] = "Vérifiez la saisie de la date de modification (format type dd-mm-yyyy).";
                     echo $erreurs["modifpdt"]."<br>";
@@ -128,16 +130,17 @@
             
             // pour produit bloqué (bouton radio oui ou non)
             $blocpdt = $_POST['blocpdt']; 
-            var_dump($blocpdt);//test
 
-                        if (count($erreurs) == 0) {// donc ya aucune erreur donc on passe à la suite
+            if (count($erreurs) == 0) {// donc ya aucune erreur donc on passe à la suite
                 //ENSUITE Enregistrement des MODIFICATIONS des données dans la base (pas mis pro_id puisque auto-incrémenté)
                 // Requête UPDATE dans la table produits
                     
+            // si $pro_ref a changé on peut l'inclure dans update
+            if ($pro_ref != $_POST["refpdt"]){
                 if ($blocpdt == 1){
-                    $requete = $db->prepare("UPDATE produits SET pro_ref = :refpdt, pro_cat_id = :catpdt, pro_libelle = :libpdt, pro_description = :descriptionpdt, pro_prix = :prixpdt, pro_stock = :stockpdt, pro_couleur = couleurpdt, pro_photo = :photopdt, pro_bloque = :blocpdt, pro_d_modif = :modifpdt
+                    $requete = $db->prepare("UPDATE produits SET pro_ref = :refpdt, pro_cat_id = :catpdt, pro_libelle = :libpdt, pro_description = :descriptionpdt, pro_prix = :prixpdt, pro_stock = :stockpdt, pro_couleur = :couleurpdt, pro_photo = :photopdt, pro_bloque = :blocpdt, pro_d_modif = :modifpdt
                     WHERE pro_id =".$pro_id.";");
-                    $requete->bindValue(":refpdt", $refpdt);////La constante de type par défaut est STR donc je ne précise que pour les autres (dates aussi considérées comme str)
+                    $requete->bindValue(":refpdt", $refpdt); //La constante de type par défaut est STR donc je ne précise que pour les autres (dates aussi considérées comme str)
                     $requete->bindValue(":catpdt", $catpdt, PDO::PARAM_INT);
                     $requete->bindValue(":libpdt", $libpdt);
                     $requete->bindValue(":descriptionpdt", $descriptionpdt);
@@ -149,8 +152,9 @@
                     $requete->bindValue(":blocpdt", $blocpdt, PDO::PARAM_INT);
                     $requete->execute();
                 } else {//modif rqt pour pas pb avec pro_bloque et valeur null par défaut pour s'afficher dans rqt de liste.php
-                    $requete = $db->prepare("INSERT INTO produits (pro_ref, pro_cat_id, pro_libelle, pro_description, pro_prix, pro_stock, pro_couleur, pro_photo, pro_d_ajout) VALUES (:refpdt, :catpdt, :libpdt, :descriptionpdt, :prixpdt, :stockpdt, :couleurpdt, :photopdt, :ajoutpdt)");
-                    $requete->bindValue(":refpdt", $refpdt);////La constante de type par défaut est STR donc je ne précise que pour les autres (les dates sont considérées comme str)
+                    $requete = $db->prepare("UPDATE produits SET pro_ref = :refpdt, pro_cat_id = :catpdt, pro_libelle = :libpdt, pro_description = :descriptionpdt, pro_prix = :prixpdt, pro_stock = :stockpdt, pro_couleur = :couleurpdt, pro_photo = :photopdt, pro_d_modif = :modifpdt
+                    WHERE pro_id =".$pro_id.";");
+                    $requete->bindValue(":refpdt", $refpdt); 
                     $requete->bindValue(":catpdt", $catpdt, PDO::PARAM_INT);
                     $requete->bindValue(":libpdt", $libpdt);
                     $requete->bindValue(":descriptionpdt", $descriptionpdt);
@@ -158,10 +162,39 @@
                     $requete->bindValue(":stockpdt", $stockpdt, PDO::PARAM_INT);
                     $requete->bindValue(":couleurpdt", $couleurpdt);
                     $requete->bindValue(":photopdt", $photopdt);
-                    $requete->bindValue(":ajoutpdt", $ajoutpdt);
+                    $requete->bindValue(":modifpdt", $modifpdt);
                     $requete->execute();
                 }
 
+            } else {//donc si pro_ref n'a pas changé, je l'enlève du update pour pas bloquer requete
+                if ($blocpdt == 1){
+                    $requete = $db->prepare("UPDATE produits SET pro_cat_id = :catpdt, pro_libelle = :libpdt, pro_description = :descriptionpdt, pro_prix = :prixpdt, pro_stock = :stockpdt, pro_couleur = :couleurpdt, pro_photo = :photopdt, pro_bloque = :blocpdt, pro_d_modif = :modifpdt
+                    WHERE pro_id =".$pro_id.";");
+                    $requete->bindValue(":catpdt", $catpdt, PDO::PARAM_INT);
+                    $requete->bindValue(":libpdt", $libpdt);
+                    $requete->bindValue(":descriptionpdt", $descriptionpdt);
+                    $requete->bindValue(":prixpdt", $prixpdt, PDO::PARAM_INT);
+                    $requete->bindValue(":stockpdt", $stockpdt, PDO::PARAM_INT);
+                    $requete->bindValue(":couleurpdt", $couleurpdt);
+                    $requete->bindValue(":photopdt", $photopdt);
+                    $requete->bindValue(":modifpdt", $modifpdt);
+                    $requete->bindValue(":blocpdt", $blocpdt, PDO::PARAM_INT);
+                    $requete->execute();
+                } else {//modif rqt pour pas pb avec pro_bloque et valeur null par défaut pour s'afficher dans rqt de liste.php
+                    $requete = $db->prepare("UPDATE produits SET pro_cat_id = :catpdt, pro_libelle = :libpdt, pro_description = :descriptionpdt, pro_prix = :prixpdt, pro_stock = :stockpdt, pro_couleur = :couleurpdt, pro_photo = :photopdt, pro_d_modif = :modifpdt
+                    WHERE pro_id =".$pro_id.";");
+                    $requete->bindValue(":catpdt", $catpdt, PDO::PARAM_INT);
+                    $requete->bindValue(":libpdt", $libpdt);
+                    $requete->bindValue(":descriptionpdt", $descriptionpdt);
+                    $requete->bindValue(":prixpdt", $prixpdt, PDO::PARAM_INT);
+                    $requete->bindValue(":stockpdt", $stockpdt, PDO::PARAM_INT);
+                    $requete->bindValue(":couleurpdt", $couleurpdt);
+                    $requete->bindValue(":photopdt", $photopdt);
+                    $requete->bindValue(":modifpdt", $modifpdt);
+                    $requete->execute();
+                }
+            }
+ 
                 //ENFIN Redirection vers la liste des produits 
                header("Location:liste.php");
           

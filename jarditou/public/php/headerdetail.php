@@ -39,7 +39,7 @@
                         <a class="nav-link" href="/jarditou/contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/jarditou/formulaireajout.html">Ajouter un produit</a>
+                        <a class="nav-link" href="formulaireajout.php">Ajouter un produit</a>
                     </li>
                 </ul>
                     <button class="btn btn-dark my-2 my-sm-0" type="button" value="Connexion" id="btnConnexion">Connexion</button>
