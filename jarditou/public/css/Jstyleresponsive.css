@@ -1,22 +1,16 @@
-
-  @media screen and (max-width: 768px) {
-
-
-
-    /*redimensionne police - attention mettre balises dans ordre du flux!!!*/
-    .box1 {
-      font-size: 2em;
-    }
-
-
-    /*cache colonne de droite*/
-    .box2 {
-      display: none;
-    }
-
-    /*affiche menu verticalement*/
-    li {
-      display: block;
-
-
+@media screen and (max-width: 768px) {
+/*redimensionne police - attention mettre balises dans ordre du flux!!!*/
+  .box1 {
+    font-size: 2em;
   }
+
+/*cache colonne de droite*/
+  .box2 {
+    display: none;
+  }
+
+/*affiche menu verticalement*/
+  li {
+    display: block;
+  }
+}

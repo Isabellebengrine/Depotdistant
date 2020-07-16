@@ -24,6 +24,7 @@ if ($requete->rowCount() == 0)
    die("La table est vide");
 }
 
+echo '<div class="table-responsive">';
 echo '<table  class="table table-striped table-bordered">';//on ouvre un tableau HTML car les résultats - les informations sur les produits de notre liste - vont être affichés sous cette forme
 /* tant qu'un enregistrement est présent dans la variable $result, on va afficher des informations. La présence d'un enregistrement est vérifiée grâce à la fonction fetch(PDO::FETCH_OBJ) qui lit le premier enregistrement trouvé par la requête SQL, puis le supprime puis lit le suivant et ainsi de suite... Quand il n'y a plus d'enregistrement disponible, elle renvoie la valeur 0, ce qui provoque l'arrêt de la boucle. Il est possible de remplacer l'instruction while par foreach */
 echo "<thead><tr><th>Photo</th><th>ID</th><th>Référence</th><th>Libellé</th><th>Prix</th><th>Stock</th><th>Couleur</th><th>Ajout</th><th>Modif</th><th>Bloqué</th></tr></thead><tbody>";//affiche les cellules th soit entêtes de colonnes donc noms des champs
@@ -51,11 +52,12 @@ foreach ($tableau as $row)
 }
 //
 echo "</table>"; 
+echo '</div>'; //ferme div table responsive
 
 ?>
     
-        </div> 	
-    </div>   
+
+    </div>   <!--ferme div container -->
     <!--pour intégrer fichiers Javascript nécessaires à Bootstrap; placez ce code avant la fermeture de la balise body, l'ordre des fichiers est à respecter (Jquery, Popper puis Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

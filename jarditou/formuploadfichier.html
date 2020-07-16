@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire avec upload de fichier</title>
+</head>
+<body>
+    <!-- Le type d'encodage des données, enctype, DOIT être spécifié comme ce qui suit -->
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <!-- Le nom de l'élément input détermine le nom dans le tableau $_FILES -->
+        Envoyez ce fichier : <input type="file" name="fileToUpload" id="fileToUpload"><!--fait bouton 'choisir un fichier' et dit le nom du fichier choisi ou 'aucun fichier choisi'-->
+        <input type="hidden" name="MAX_FILE_SIZE" value="50000" /><!--en octets, doit toujours être utilisé car il permet d'informer l'utilisateur que le transfert désiré est trop lourd avant d'atteindre la fin du téléchargement. Gardez à l'esprit que ce paramètre peut être "trompé" du côté du navigateur facilement, aussi ne faites pas confiance à ce dernier, ne s'agissant finalement que d'une fonctionnalité de convenance côté client. Le paramètre PHP (côté serveur) à propos de la taille maximale d'un fichier téléchargé, ne peut, lui, être trompé-->
+        <input type="submit" value="Envoyer le fichier" name="submit">
+    </form>
+</body>
+</html>

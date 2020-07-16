@@ -5,8 +5,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><!--règle un bug spécifique du navigateur
         Apple Safari mobile sous le système d'exploitation iOS 9 (iPhone/iPad).-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><!--pour importer Bootstrap via une URL pointant sur un CDN (un serveur externe hébergeant des fichiers)-->
-    <link rel="stylesheet" type="text/css" href="public/css/jarditoustyle.css">
-    <link rel="stylesheet" media="screen and (max-width: 768px)" href="public/css/Jstyleresponsive.css">
+    <link rel="stylesheet" media="screen and (max-width: 768px)" href="public/css/style.css" type="text/css">
     <title>Formulaire d'ajout de nouveau produit</title>
  </head>
  <body> 
@@ -45,10 +44,20 @@
                 <input type="text" class="form-control" id="refpdt" name="refpdt">
                 <p id="refHelp" class="text-danger"></p>
               </div>
-              <div class="form-group"><!--ici dans db cat_id est FK dans produits donc j'indique que le code doit être nb entre 1 et 30 pour que requête fonctionne-->
+              <div class="form-group"><!--ici dans db cat_id est FK dans produits donc j'indique que le code doit être nb entre 1 et 30 pour que requête fonctionne - 15/07 edit champ devenu liste deroulante avec requete cf doct formulaireajout.php-->
                 <label for="catpdt">Catégorie (nombre entier entre 1 et 30)</label>
                 <input type="text" class="form-control" id="catpdt" name="catpdt">
                 <p id="catHelp" class="text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label for="catpdt">Catégorie (liste déroulante) :</label>
+                <select class="form-control" id="catpdt">
+                  
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="libpdt">Libellé</label>

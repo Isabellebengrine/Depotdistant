@@ -50,7 +50,7 @@
             </div> 
         </nav>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-12 col-sm-12">
                 <img src="/jarditou/public/images/promotion.jpg" title="Promotion" alt="photo de promotion" class="img-fluid">
             </div>
         </div>
