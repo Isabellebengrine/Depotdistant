@@ -1,0 +1,112 @@
+/*Par défaut, pratiquement tous les éléments possèdent des marges, même le body. Pour mettre tout le monde d'accord et partir sur les meilleures bases
+possibles pour avoir le controle de son design, on commence donc en général par faire un "reset" en début de feuille de style, ce qui permet de ne plus avoir d'espace
+ entre les éléments html et body. Pour cela, on affecte tout simplement 0 (sans unités) aux tailles de margin et padding, comme suit:
+html, body {
+ margin:0;
+ padding:0;
+ }
+ou bien On peut même mettre tous les éléments à zéro avec le code suivant (c'est radical) :*/
+* {
+  margin:0;
+ padding:0;
+ } 
+ 
+/*Pour projets plus elabores, FAIRE reset plus specifique avec fichier normalize.css - voir w3*/
+
+/*Pour gerer taille polices avec unite em:
+https://www.alsacreations.com/article/lire/563-gerer-la-taille-du-texte-avec-les-em.html
+donc pour obtenir un texte correctement lisible sur toutes les configurations, il est préférable de ne pas imposer de taille de texte « de base » fixe, mais d'utiliser la taille du texte par défaut du navigateur. Seule petite nuance : dans la plupart des cas, la taille du texte par défaut est assez élevée. On aura donc tendance à vouloir la baisser quelque peu, et ce pour l'ensemble de la page. Le plus simple est de réaliser cette opération au niveau des éléments html et body. Petit exemple :*/
+html {font-size: 100%;}/*correctif pour un bug d'Internet Explorer Windows, bug qui rend « anarchique » le redimensionnement du texte à la volée dans ce navigateur*/
+body {font-size: 1em;}/*attention cascade donc font-size des elmts imbriqués se multiplient entre elles, donc éviter de spécifier font-size à moins q nécessaire*/
+
+header, footer {
+	display: inline-block;
+	width: 100%;
+}
+
+/*pour ecrire tout le jardin plus gros et aligner avec image*/
+header p {
+  font-size: 2em;
+  line-height: 2em;
+}
+
+/*pour faire layout sur 2 colonnes, voir:
+https://www.w3schools.com/howto/howto_css_two_columns.asp
+A modern way of creating two columns, is to use CSS Flexbox. However, it is not supported in Internet Explorer 10 and earlier versions.
+It is up to you if you want to use floats or flex to create a two-column layout. However, if you need support for IE10 and down, you should use float.
+
+Pour colonnes égales chacune à 50% de l'écran*/
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*pour changer affichage des menus du haut et du bas*/
+nav {
+  background-color: black; 
+  list-style-type: none;
+  text-align: left;
+  padding: 15px;
+  padding-left: 40px;
+  margin: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+li {
+  display: inline-block;
+}
+a {
+  color: white;
+  font-size: 1.2em;
+}
+
+/* pour donner width 100% à img promo*/
+article img {
+  width: 100%;
+}
+
+/*pour faire layout sur 2 colonnes, une de 70% de large et 2e colonne, pour la div section:
+faire flexbox pour avoir meme hauteur de colonne */
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container .box1 {
+  width: 70%;
+  margin: 10px;
+}
+
+.flex-container .box2 {
+  width: 30%;
+  background-color: grey;
+  margin: 0px;
+}
+
+/*pour avoir mots colonne droite tout en haut de colonne*/
+.box2 p {
+  margin-top: 0px;
+}
+
+/*pour espacer lignes de texte*/
+section p, h2, h3 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/*pour styliser hr voir https://css-tricks.com/examples/hrs/ avec codes
+*/
+hr.style-six {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+

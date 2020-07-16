@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><!--règle un bug spécifique du navigateur
+        Apple Safari mobile sous le système d'exploitation iOS 9 (iPhone/iPad).-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><!--pour importer Bootstrap via une URL pointant sur un CDN (un serveur externe hébergeant des fichiers)-->
+	<title>Contact Jarditou</title>
+    <link rel="stylesheet" media="screen and (max-width: 768px)" href="public/css/style.css" type="text/css">
+</head>
+<body>
+	<header>
+
+		<div class="container-fluid"> 
+			<div class="row">
+                <div class="col-8 col-sm-8"><img src="public/images/jarditou_logo.jpg" alt="Logo de Jarditou" title="Logo Jarditou" width="150">
+                </div>
+				<div class="col-4 col-sm-4"><h1 class="text-center">Tout le jardin</h1>
+				</div>
+			</div>
+		</div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="www.jarditou.com">Jarditou.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+		  
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			  <ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+				  <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="public/php/liste.php">Tableau</a>
+				</li>
+				<li class="nav-item active">
+				  <a class="nav-link" href="contact.html">Contact</a>
+				</li>
+			  </ul>
+			  <form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" placeholder="Votre promotion" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+			  </form>
+			</div>
+		</nav>
+		<article>
+			<img src="public/images/promotion.jpg" alt="Promotion sur lames de terrasse" title="Promo Jarditou" width="100%">
+   		</article>
+	</header>
+    <section>
+		<div class="container-fluid"> 
+			<div class="row m-1 m-sm-1">
+				<div class="col-12 col-sm-12 text-justify">
+                    <form method="post" action="http://localhost/jarditou/public/php/controle.php" id="formulaire_contact">
+                    <!--vu sur w3schools form validation: autre possibilité
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+                        pour envoyer data sur page elle-meme au lieu de sauter à une page différente
+                    NB. sécurité supplémentaire avec fonction htmlspecialchars pour se protéger contre injection de code javascript dans un champ
+                    The htmlspecialchars() function converts special characters to HTML entities. This means that it will replace HTML characters like < and > with &lt; and &gt;. This prevents attackers from exploiting the code by injecting HTML or Javascript code (Cross-site Scripting attacks) in forms.                
+                    PB pour sécurité : The $_SERVER["PHP_SELF"] variable can be used by hackers! If PHP_SELF is used in your page then a user can enter a slash (/) and then some Cross Site Scripting (XSS) commands to execute. Cross-site scripting (XSS) is a type of computer security vulnerability typically found in Web applications. XSS enables attackers to inject client-side script into Web pages viewed by other users.      + d'infos sur https://www.w3schools.com/php/php_form_validation.asp
+                    
+                    -->
+                    <p>* Ces zones sont obligatoires</p>
+                    <fieldset><!--pour donner titre à une partie avec balise legend-->
+                        <legend><h2>Vos coordonnées</h2></legend>
+                        <div><!--enlevé class="form-group" pour désactiver msg d'erreur et permettre envoi du form pour voir si msg erreur php fonctionne-->
+                            <label for="lname">Nom*</label>
+                            <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lnameHelp" placeholder="Veuillez saisir votre nom"><!--enlevé required pour désactiver controle automatiq-->
+                            <p id="lnameHelp" class="text-danger"></p>
+                        </div>    
+                        <div class="form-group">
+                            <label for="fname">Prénom*</label>
+                            <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" placeholder="Veuillez saisir votre prénom"><!--enlevé required-->
+                            <p id="fnameHelp" class="text-danger"></p>
+                        </div>
+                        <p>Sexe*</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexe" id="féminin" value="féminin"  checked>
+                            <label class="form-check-label" for="féminin">Féminin</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexe" id="masculin" value="masculin">
+                            <label class="form-check-label" for="masculin">Masculin</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="datenaissance">Date de naissance*</label><!--enlevé input type="date" pour supprimer msg d'erreur et value et placeholder="jj/mm/aaaa"-->
+                            <input type="text" class="form-control" id="datenaissance" name="datenaissance" aria-describedby="bdateHelp">
+                            <p id="bdateHelp" class="text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpostal">Code postal*</label>
+                            <input type="text" class="form-control" id="cpostal" name="cpostal" aria-describedby="cpHelp"><!--enlevé required-->
+                            <p id="cpHelp" class="text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" class="form-control" id="adresse" name="adresse">
+                        </div>
+                        <div class="form-group">
+                            <label for="ville">Ville</label>
+                            <input type="text" class="form-control" id="ville" name="ville">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="text" class="form-control" id="email" name="email" aria-describedby="emlHelp">
+                            <!--enlevé type = email et required et placeholder="dave.loper@afpa.fr" pour vérif php-->
+                            <p id="emlHelp" class="text-danger"></p>
+                        </div>
+                    </fieldset>
+        
+                    <fieldset>
+                        <legend><h2>Votre demande</h2></legend>
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <select multiple class="form-control" name="sujet[]" id="sujet"><!--modif du name pour php et ajout de multiple pour autoriser choix multiples-->
+                                <option selected>Veuillez sélectionner un sujet</option>
+                                <option value="commande">Mes commandes</option>
+                                <option value="question">Question sur un produit</option>
+                                <option value="reclamation">Réclamation</option>
+                                <option value="autres">Autres</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="votrequestion">Votre question* :</label>
+                        <textarea class="form-control" name="votrequestion" rows="2" cols="15" id="votrequestion"></textarea><!--enlevé required-->
+                        <p id="vqHelp" class="text-danger"></p>
+                        </div>
+                    </fieldset>
+                    
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="jaccepte" name="jaccepte[]" value="jaccepte"><!--modif du name pour php-->
+                        <label class="form-check-label" for="jaccepte"> J'accepte le traitement informatique de ce formulaire</label>
+                    </div>
+
+                    <input type="submit" class="btn btn-dark" value="Envoyer" id="boutonEnvoi">
+                    <input type="reset" class="btn btn-dark" value="Annuler">
+            
+                    </form>
+                </div> 
+            </div><!--ferme div row-->
+        </div><!--ferme div container fluid-->
+    </section><!--ferme partie centrale de page d'accueil-->
+    
+        <footer>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <!-- Toggler/collapsible Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>   <!--balise bouton : code du bouton hamburger. L'attribut data-target est obligatoire; sa valeur doit être la même que celle de l'attribut id du <div> suivant (ici collapsibleNavbar) mais préfixé du signe #-->
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">mentions légales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">horaires</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">plan du site</a>
+                        </li>
+                    </ul>
+                </div> 
+            </nav>
+        </footer>
+        
+        <!--pour intégrer fichiers Javascript nécessaires à Bootstrap; placez ce code avant la fermeture de la balise body, l'ordre des fichiers est à respecter (Jquery, Popper puis Bootstrap) -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <!--pour intégrer fichier.js pour Javascript non intrusif-->
+        <script src="public/js/controleform.js"></script>
+    </body>
+    </html>
