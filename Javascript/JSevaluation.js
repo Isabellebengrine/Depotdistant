@@ -30,18 +30,22 @@ calcul1.addEventListener("click", exo1);
 //Exercice 2 : Table de multiplication
 
 function TableMultiplication(n){
-	let n;
 	do{
     	n = prompt("Entrez le nombre dont vous voulez la table de multiplication:");
- 	}while(isNaN(n) || n%1!==0);//verif que n est un nombre et un nombre entier, sinon redemande n
-	document.getElementById("tabletitre").innerHTML ="La table de multiplication du nombre: "+n;
-	for (i=1;i<=10;i++){
-		var c = 'table'+i;
-		document.getElementById(c).innerHTML = "<p>" + i + " x " + parseInt(n) + " = " + (i*parseInt(n)) + "</p>";
+	 }while(isNaN(n) || n%1!==0);//verif que n est un nombre et un nombre entier, sinon redemande n
+	if (n == null) {
+		alert("Vous ne voulez pas participer? ok!");
+	} else {
+		document.getElementById("tabletitre").innerHTML ="La table de multiplication du nombre: "+n;
+		for (i=1;i<=10;i++){
+			var c = 'table'+i;
+			document.getElementById(c).innerHTML = "<p>" + i + " x " + parseInt(n) + " = " + (i*parseInt(n)) + "</p>";
+		}
 	}
 }//fin de declaration de la fonction
 //appel de la fonction en cliquant sur le bouton
 let calcul2 = document.getElementById("exercice2");
+calcul2.addEventListener("click", effacer);
 calcul2.addEventListener("click", TableMultiplication);
 
 //Exercice 3 : recherche d'un prénom
@@ -61,6 +65,7 @@ function exo3(){
 }
 //appel de la fonction en cliquant sur le bouton
 let calcul3 = document.getElementById("exercice3");
+calcul3.addEventListener("click", effacer);
 calcul3.addEventListener("click", exo3);
 
 //Exercice 4 : total d'une commande
@@ -69,29 +74,46 @@ function TotalCommande(){
 	let REM = 0, PORT = 6;
 	let PU = prompt("Saisissez le Prix Unitaire en Euros:");
 	let QTECOM = prompt("Saisissez la quantité commandée:");
-	let TOT = parseInt(PU)*parseInt(QTECOM);
-	if (TOT<100){
+	if (PU == null || QTECOM== null) {
+		alert("Vous ne voulez pas participer? ok!");		
+	}else {
+		let TOT = parseInt(PU)*parseInt(QTECOM);
+		if (TOT<100){
 		REM = 0;
-	}
-	if (TOT>=100 && TOT<=200){
-		REM = 0.05*TOT;
-	}
-	if (TOT>200){
-		REM = 0.1*TOT;
-	}
-	if (TOT>=500){
-		PORT = 0;
-	} else {
-		PORT = 0.02*(TOT-REM);
-		if (PORT<6){
-			PORT = 6;
 		}
-	}
+		if (TOT>=100 && TOT<=200){
+		REM = 0.05*TOT;
+		}
+		if (TOT>200){
+		REM = 0.1*TOT;
+		}
+		if (TOT>=500){
+		PORT = 0;
+		} else {
+			PORT = 0.02*(TOT-REM);
+			if (PORT<6){
+				PORT = 6;
+			}
+		}
 	let PAP = TOT - REM + PORT;
 	document.getElementById("verifexo4").innerHTML = "<p>Le prix à payer est donc:</p>" + "<p>Total de " + TOT + "</p><p>- Remise de " + REM + "</p><p>+ Frais de Port de " + PORT + "</p><p>Prix à payer = " + PAP + "</p><p>Et je ne vous parle pas de la TVA!";
 	return (TOT, REM, PORT, PAP);//important si ces valeurs servent encore ensuite ailleurs
+	}
 }
 //appel de la fonction en cliquant sur le bouton
 let calcul4 = document.getElementById("exercice4");
+calcul4.addEventListener("click", effacer);
 calcul4.addEventListener("click", TotalCommande);
+
+//pour effacer les différents innerHTML quand on clic sur bouton
+function effacer(){
+	document.getElementById("tabletitre").innerHTML = "";
+	for (i=1;i<=10;i++){
+		var c = 'table'+i;
+		document.getElementById(c).innerHTML = "";
+	}
+	document.getElementById("verifExo3").innerHTML = "";
+	document.getElementById("verif2Exo3").innerHTML = "";
+	document.getElementById("verifexo4").innerHTML = "";
+}
 
