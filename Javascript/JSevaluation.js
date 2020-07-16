@@ -1,6 +1,7 @@
 //Exercice 1 - Calcul du nombre de jeunes, de moyens et de vieux
-let i = 1, age = 0, jeune = 0, moyen = 0, vieux = 0;
+
 function exo1(){
+	let i = 1, age = 0, jeune = 0, moyen = 0, vieux = 0;//variables locales pour que leurs valeurs ne soient pas reprises si je reclic sur le bouton une 2e fois
 	for (i=1; age<100; i++){
 		age = prompt("Entrez l'âge numéro " + i +" ou \nCesser la saisie en entrant un âge supérieur ou égal à 100");
 		if (parseInt(age)<20){
@@ -10,17 +11,26 @@ function exo1(){
   		} else {
   			moyen = moyen + 1;
   		}
-  	}
-  	alert("Résultats:\nIl y a " + jeune + " jeunes,\n " + moyen + " personnes entre 20 et 40 ans,\n et " + vieux + " vieux, y compris un centenaire!");
-  	return (jeune, moyen, vieux);
+	  }
+	if (jeune < 2){// donc 0 ou 1 jeune au singulier
+		if (moyen < 2){//donc 0 ou 1 moyen donc personne singulier aussi
+			alert("Résultats:\nIl y a " + jeune + " jeune,\n " + moyen + " personne entre 20 et 40 ans,\n et " + vieux + " vieux, y compris un centenaire!");
+		} else {// donc jeune singulier et personnes au pluriel
+			alert("Résultats:\nIl y a " + jeune + " jeune,\n " + moyen + " personnes entre 20 et 40 ans,\n et " + vieux + " vieux, y compris un centenaire!");
+		}
+	} else {
+		alert("Résultats:\nIl y a " + jeune + " jeunes,\n " + moyen + " personnes entre 20 et 40 ans,\n et " + vieux + " vieux, y compris un centenaire!");
+	} 
+	return (jeune, moyen, vieux);
 }
 //appel de la fonction en cliquant sur le bouton
 let calcul1 = document.getElementById("exercice1");
 calcul1.addEventListener("click", exo1);
 
 //Exercice 2 : Table de multiplication
-let n;
+
 function TableMultiplication(n){
+	let n;
 	do{
     	n = prompt("Entrez le nombre dont vous voulez la table de multiplication:");
  	}while(isNaN(n) || n%1!==0);//verif que n est un nombre et un nombre entier, sinon redemande n
@@ -37,9 +47,9 @@ calcul2.addEventListener("click", TableMultiplication);
 //Exercice 3 : recherche d'un prénom
 function exo3(){
 	let tab = ["Audrey", "Aurélien", "Flavien", "Jérémy", "Laurent", "Melik", "Nouara", "Salem", "Samuel", "Stéphane"];
-	let prenom = prompt("Saisissez un prénom");
+	let prenom = prompt("Saisissez un prénom (avec la première lettre en majuscule svp) :");
 	let idx = tab.indexOf(prenom);
-	if (idx > -1){
+	if (idx > -1){//donc prenom dans tableau
 		tab.splice(idx,1);
 	    tab.push("  ");
 	} else{//donc prenom pas dans tableau
@@ -54,8 +64,9 @@ let calcul3 = document.getElementById("exercice3");
 calcul3.addEventListener("click", exo3);
 
 //Exercice 4 : total d'une commande
-let REM = 0, PORT = 6;
+
 function TotalCommande(){
+	let REM = 0, PORT = 6;
 	let PU = prompt("Saisissez le Prix Unitaire en Euros:");
 	let QTECOM = prompt("Saisissez la quantité commandée:");
 	let TOT = parseInt(PU)*parseInt(QTECOM);
@@ -71,7 +82,7 @@ function TotalCommande(){
 	if (TOT>=500){
 		PORT = 0;
 	} else {
-		PORT = 0.02*TOT;
+		PORT = 0.02*(TOT-REM);
 		if (PORT<6){
 			PORT = 6;
 		}
