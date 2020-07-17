@@ -4,7 +4,7 @@ include("header.php");
 
 <section>
     <div class="container-fluid"> 
-        <div class="row shadow mb-2 ml-1 bg-white rounded">
+        <div class="row shadow mb-1 ml-1 bg-white rounded">
             <div class="col-12 col-lg-8 text-justify">
                 <h2>L'entreprise</h2>
                 <p>Notre entreprise familiale met tout son savoir-faire à votre disposition dans le domaine du jardin et du paysagisme.</p>
@@ -20,33 +20,8 @@ include("header.php");
             </div> 
         </div>
     </div>   
-
 </section><!--ferme partie centrale de page d'accueil-->
 
-<footer>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <!-- Toggler/collapsible Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>   <!--balise bouton : il s'agit du code du bouton hamburger. L'attribut data-target est obligatoire; sa valeur doit être la même que celle de l'attribut id du <div> suivant (ici collapsibleNavbar) mais préfixé du signe #-->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">mentions légales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">horaires</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">plan du site</a>
-                </li>
-            </ul>
-        </div> 
-        
-    </nav>
-
-</footer>
 <?php
 include("footer.php");
 ?>
