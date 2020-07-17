@@ -73,12 +73,12 @@
                 </div>
               <div class="form-check-inline">
                 <label class="form-check-label">Produit bloqué ?:
-                  <input type="radio" class="form-check-input" name="optradio" <?php if (!is_null($produit->pro_bloque)) { echo "checked"; } ?> disabled="disabled">Oui
+                  <input type="radio" class="form-check-input" name="optradio" <?php if ($produit->pro_bloque == 1) { echo "checked"; } ?> disabled="disabled">Oui
                 </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio" <?php if (is_null($produit->pro_bloque)) { echo "checked"; } ?> disabled="disabled">Non
+                <input type="radio" class="form-check-input" name="optradio" <?php if (is_null($produit->pro_bloque) OR $produit->pro_bloque == 0) { echo "checked"; } ?> disabled="disabled">Non
               </label>
             </div>
             <div class="form-group">
