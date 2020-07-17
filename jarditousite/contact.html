@@ -21,7 +21,7 @@
 		</div>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="www.jarditou.com">Jarditou.com</a>
+			<a class="navbar-brand" href="#">Jarditou.com</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -29,13 +29,13 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			  <ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-				  <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
+				  <a class="nav-link" href="public/php/index.php">Accueil</a>
 				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="public/php/liste.php">Tableau</a>
 				</li>
 				<li class="nav-item active">
-				  <a class="nav-link" href="contact.html">Contact</a>
+				  <a class="nav-link" href="contact.html">Contact<span class="sr-only">(current)</span></a>
 				</li>
 			  </ul>
 			  <form class="form-inline my-2 my-lg-0">
@@ -52,7 +52,7 @@
 		<div class="container-fluid"> 
 			<div class="row m-1 m-sm-1">
 				<div class="col-12 col-sm-12 text-justify">
-                    <form method="post" action="http://localhost/jarditou/public/php/controle.php" id="formulaire_contact">
+                    <form method="post" action="public/php/controle.php" id="formulaire_contact">
                     <!--vu sur w3schools form validation: autre possibilité
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
                         pour envoyer data sur page elle-meme au lieu de sauter à une page différente
@@ -84,7 +84,7 @@
                             <label class="form-check-label" for="masculin">Masculin</label>
                         </div>
                         <div class="form-group">
-                            <label for="datenaissance">Date de naissance*</label><!--enlevé input type="date" pour supprimer msg d'erreur et value et placeholder="jj/mm/aaaa"-->
+                            <label for="datenaissance">Date de naissance*</label><!--enlevé input type="date" et value et placeholder="jj/mm/aaaa" pour personnaliser msg d'erreur-->
                             <input type="text" class="form-control" id="datenaissance" name="datenaissance" aria-describedby="bdateHelp">
                             <p id="bdateHelp" class="text-danger"></p>
                         </div>
@@ -104,7 +104,7 @@
                         <div class="form-group">
                             <label for="email">Email*</label>
                             <input type="text" class="form-control" id="email" name="email" aria-describedby="emlHelp">
-                            <!--enlevé type = email et required et placeholder="dave.loper@afpa.fr" pour vérif php-->
+                            <!--enlevé type = email et required et placeholder="dave.loper@afpa.fr" pour vérif js et php-->
                             <p id="emlHelp" class="text-danger"></p>
                         </div>
                     </fieldset>
