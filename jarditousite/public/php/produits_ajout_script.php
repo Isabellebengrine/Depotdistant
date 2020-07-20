@@ -27,7 +27,7 @@
         }
 
         // définir variables et les initialiser avec valeurs vides
-        $refpdt = $catpdt = $libpdt = $descriptionpdt = $prixpdt = $stockpdt = $couleurpdt = $photopdt = $ajoutpdt = $modifpdt = $blocpdt = "";
+        $refpdt = ""; $catpdt = ""; $libpdt = ""; $descriptionpdt = ""; $prixpdt =""; $stockpdt = ""; $couleurpdt = ""; $photopdt = ""; $ajoutpdt = ""; $modifpdt = ""; $blocpdt = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {// donc quand form est envoyé
         

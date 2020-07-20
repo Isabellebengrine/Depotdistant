@@ -28,7 +28,7 @@
 
         // définir variables et les initialiser avec valeurs vides
         
-        //test - $catpdt = ""; $libpdt = ""; $descriptionpdt = ""; $prixpdt = ""; $stockpdt = ""; $couleurpdt = ""; $photopdt = ""; $modifpdt = ""; $blocpdt = "";
+        $catpdt = ""; $libpdt = ""; $descriptionpdt = ""; $prixpdt = ""; $stockpdt = ""; $couleurpdt = ""; $photopdt = ""; $modifpdt = ""; $blocpdt = "";
         $pro_id = $_GET["pro_id"];
         $pro_ref = $_GET["pro_ref"];
 
